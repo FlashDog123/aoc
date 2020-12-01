@@ -201,7 +201,7 @@ var inputArray = [
   1593,
 ];
 var targetOutput = 2020;
-var iteraties = 0;
+var iterations = 0;
 var minValue = 0;
 main();
 
@@ -241,7 +241,7 @@ function objectLoop() {
         continue;
       }
       for (var number3 in inputArray) {
-        iteraties++;
+        iterations++;
         if (
           inputArray[number1] + inputArray[number2] + inputArray[number3] ===
           targetOutput
@@ -249,7 +249,7 @@ function objectLoop() {
           console.log(
             inputArray[number1] * inputArray[number2] * inputArray[number3]
           );
-          console.log(iteraties);
+          console.log(iterations);
           canLoop = true;
           break;
         }
