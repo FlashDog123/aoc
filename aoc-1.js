@@ -263,3 +263,6 @@ function objectLoop() {
     }
   }
 }
+
+// Iterations = 845
+// Time = 5.654ms
