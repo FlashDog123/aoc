@@ -22,9 +22,9 @@ const part1 = () => {
 }
 
 function findNumber(input: string): number {
-    let amount = Array.from({ length: 128 }, (v, i) => i)
+    let amount = Array.from({ length: 128 }, (v, i) => i);
     if (input[0] === 'L' || input[0] === 'R') {
-        amount = Array.from({ length: 8 }, (v, i) => i)
+        amount = Array.from({ length: 8 }, (v, i) => i);
     }
 
     for (let index = 0; index < input.length; index++) {
@@ -53,9 +53,6 @@ const part2 = () => {
         seatArray.push(calc);
     })
     seatArray = seatArray.filter((v, i, a) => a.indexOf(v) === i);
-    console.log(seatArray.sort(function (a, b) {
-        return a - b;
-    }));
 
     return findSeat(seatArray.sort(function (a, b) {
         return a - b;
