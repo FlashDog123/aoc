@@ -1,0 +1,9 @@
+{
+	"compilerOptions": {
+		"target": "ES6",
+		"module": "commonjs",
+		"esModuleInterop": true,
+		"sourceMap": true
+	},
+	"files": ["day-2/main.ts", "day-3/index.ts", "day-4/index.ts", "day-5/index.ts", "day-6/index.ts"]
+}
