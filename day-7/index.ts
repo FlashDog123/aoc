@@ -6,7 +6,7 @@ const loadInput = () => {
   return bagRules;
 };
 
-let bagHash = {};
+let bagHash = [];
 let bags = loadInput()
   .filter((bag) => bag)
   .map((containingBags) => {
@@ -63,14 +63,12 @@ function findNeededBags(color) {
   const outerBag = bagHash[color];
 
   return outerBag.innerBags.reduce((count, innerBag) => {
-    const innerCount = findNeededBags(innerBag.color);
+    const childCount = findNeededBags(innerBag.color);
 
-    const test = count + innerBag.amount + innerBag.amount * innerCount;
-    console.log(test);
-    // last item returns undefined. so take second to last one
-    return test;
+    return count + innerBag.amount + (innerBag.amount * childCount);
   }, 0);
+
 }
 
-// console.log(findBagCount('shiny gold').length);
-console.log(findNeededBags('shiny gold').length);
+console.log(findBagCount('shiny gold').length);
+console.log(findNeededBags('shiny gold'));
