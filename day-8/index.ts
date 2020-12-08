@@ -17,15 +17,22 @@ const loadInput = () => {
   return actions;
 };
 
-function loopList() {
-  let actions = loadInput();
+function loopList(stopOnUnique: boolean, actions = null) {
+  if (!actions) {
+    actions = loadInput();
+  }
   let accumulator = 0;
   let uniqueIndexes = new Set([]);
   for (let index = 0; index < actions.length; index++) {
     const action = actions[index];
     if (uniqueIndexes.has(index)) {
-      break;
+      if (stopOnUnique) {
+        return null;
+      } else {
+        return accumulator;
+      }
     }
+
     uniqueIndexes.add(index);
 
     if (action.type === actionTypes.acc) {
@@ -35,8 +42,38 @@ function loopList() {
     if (action.type === actionTypes.jmp) {
       index += action.amount - 1;
     }
+    if (index > actions.length || index < 0) {
+      break;
+    }
   }
   return accumulator;
 }
 
-console.log(loopList());
+function checkLoop() {
+  let actions = loadInput();
+  for (let index = 0; index < actions.length; index++) {
+    const action = actions[index];
+
+    if (action.type === actionTypes.jmp) {
+      action.type = actionTypes.nop;
+    } else if (action.type === actionTypes.nop) {
+      action.type = actionTypes.jmp;
+    } else {
+      continue;
+    }
+
+    actions[index] = action;
+
+    const result = loopList(true, actions);
+
+    if (result !== null && result !== 0) {
+      return result;
+    }
+
+    actions = loadInput();
+  }
+  return null
+}
+
+console.log(loopList(false));
+console.log(checkLoop());
