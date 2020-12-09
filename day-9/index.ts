@@ -1,6 +1,6 @@
 import * as fs from "fs";
 
-const loadInput = () => {
+const loadInput = (): number[] => {
   const rawActions = fs.readFileSync("input.txt", "utf8")
     .split('\n')
     .filter((action) => action);
@@ -8,7 +8,7 @@ const loadInput = () => {
   return numbers;
 };
 
-function findCorruptedNumber(startNumber = 25) {
+function findCorruptedNumber(startNumber = 25): number {
   const numbers = loadInput();
 
   for (let index = startNumber; index < numbers.length; index++) {
@@ -21,7 +21,7 @@ function findCorruptedNumber(startNumber = 25) {
   return null;
 }
 
-function findOutcome(index: number, startNumber: number) {
+function findOutcome(index: number, startNumber: number): boolean {
   const numbers = loadInput();
   const slicedNumbers = numbers.slice(index - startNumber, index);
 
@@ -39,13 +39,13 @@ function findOutcome(index: number, startNumber: number) {
   return false;
 }
 
-function findCorruptedRange(startNumber = 25) {
+function findCorruptedRange(startNumber: number): Set<any> {
   const corruptedNumber = findCorruptedNumber(startNumber);
   const numbers = loadInput();
 
   for (let index = 0; index < numbers.length; index++) {
     let tempTotal = 0;
-    const possibleNumbers = new Set([]);
+    const possibleNumbers = new Set();
 
     for (let innerIndex = 0; innerIndex < numbers.length; innerIndex++) {
       tempTotal += numbers[index + innerIndex];
@@ -58,10 +58,10 @@ function findCorruptedRange(startNumber = 25) {
       }
     }
   }
-  return [];
+  return new Set();
 }
 
-function calculateCorruptedRange(startNumber = 25) {
+function calculateCorruptedRange(startNumber = 25): number {
   const corruptedRange = Array.from(findCorruptedRange(startNumber)).sort(function (a, b) {
     return a - b;
   });
